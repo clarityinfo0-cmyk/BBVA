@@ -11,9 +11,9 @@
     --card-foreground: 210 100% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 210 100% 10%;
-    --primary: 208 100% 25%; /* BBVA Blue #004481 */
+    --primary: 208 100% 25%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 208 100% 36%; /* BBVA Lighter Blue #1464A5 */
+    --secondary: 208 100% 36%;
     --secondary-foreground: 210 40% 98%;
     --muted: 210 20% 90%;
     --muted-foreground: 210 20% 40%;
@@ -39,47 +39,146 @@
   }
 }
 
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-[#f4f4f4] text-foreground font-sans;
   }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+
+/* ==========================
+   BBVA SPLASH ANIMATIONS
+========================== */
+
+
+.splash-fade {
+  animation: splashFade 0.8s ease forwards;
 }
 
-@keyframes bbva-logo {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
+
+@keyframes splashFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes loading-bar {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+
+
+.logo-animation {
+  animation: logoEnter 1.4s cubic-bezier(.34,1.56,.64,1);
 }
 
-.animate-fade-in {
-  animation: fade-in 0.8s ease-out forwards;
+
+@keyframes logoEnter {
+
+  0% {
+    transform: scale(.5) rotate(-10deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.08) rotate(3deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
 }
 
-.animate-bbva-logo {
-  animation: bbva-logo 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+
+.logo-shine {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,.7),
+    transparent 70%
+  );
+
+  transform: translateX(-150%);
+
+  animation: shine 2.5s infinite;
 }
 
-.animate-loading-bar {
-  animation: loading-bar 2s infinite linear;
+
+
+@keyframes shine {
+
+  100% {
+    transform: translateX(150%);
+  }
+
 }
+
+
+
+.title-animation {
+
+  animation:
+    titleUp 1s ease .5s both;
+
+}
+
+
+@keyframes titleUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+
+.loading-bar {
+
+  animation: loadingMove 1.8s infinite linear;
+
+}
+
+
+
+@keyframes loadingMove {
+
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(400%);
+  }
+
+}
+
+
+
+/* utilidades */
 
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display:none;
 }
+
 .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  -ms-overflow-style:none;
+  scrollbar-width:none;
 }

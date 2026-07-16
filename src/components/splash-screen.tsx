@@ -28,21 +28,18 @@ export function SplashScreen({ children }: SplashScreenProps) {
 
       <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#004481] splash-fade">
 
-        {/* Fondo */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0057A8] via-[#004481] to-[#003A70]" />
 
-        {/* Círculos decorativos */}
-        <div className="absolute w-[700px] h-[700px] rounded-full bg-white/5 blur-3xl -top-40 -left-40 animate-pulse"></div>
+        <div className="absolute w-[700px] h-[700px] rounded-full bg-white/5 blur-3xl -top-40 -left-40 animate-pulse" />
 
-        <div className="absolute w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl bottom-[-150px] right-[-150px] animate-pulse"></div>
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl bottom-[-150px] right-[-150px] animate-pulse" />
 
         <div className="relative flex flex-col items-center">
 
-          {/* Logo */}
           <div className="relative">
 
             <Image
-              src="/icon-512.png"
+              src="/android-chrome-512x512.png"
               alt="BBVA"
               width={150}
               height={150}
@@ -50,12 +47,10 @@ export function SplashScreen({ children }: SplashScreenProps) {
               className="logo-animation"
             />
 
-            {/* brillo */}
-            <div className="logo-shine"></div>
+            <div className="logo-shine" />
 
           </div>
 
-          {/* Texto */}
           <h1 className="mt-10 text-white text-5xl font-bold tracking-tight title-animation">
             BBVA
           </h1>
@@ -64,11 +59,8 @@ export function SplashScreen({ children }: SplashScreenProps) {
             Banca Digital
           </p>
 
-          {/* Barra */}
           <div className="mt-16 w-64 h-1 rounded-full bg-white/20 overflow-hidden">
-
-            <div className="loading-bar h-full bg-white"></div>
-
+            <div className="loading-bar h-full bg-white" />
           </div>
 
           <p className="mt-6 text-white/60 text-xs tracking-[5px] animate-pulse">
