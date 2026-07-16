@@ -1,0 +1,85 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 100% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 100% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 100% 10%;
+    --primary: 208 100% 25%; /* BBVA Blue #004481 */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 208 100% 36%; /* BBVA Lighter Blue #1464A5 */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 20% 90%;
+    --muted-foreground: 210 20% 40%;
+    --accent: 210 20% 96%;
+    --accent-foreground: 208 100% 25%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 208 100% 25%;
+    --radius: 0.15rem;
+  }
+
+  .dark {
+    --background: 210 20% 5%;
+    --foreground: 0 0% 98%;
+    --card: 210 20% 7%;
+    --card-foreground: 0 0% 98%;
+    --primary: 208 100% 45%;
+    --primary-foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#f4f4f4] text-foreground font-sans;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bbva-logo {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes loading-bar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-bbva-logo {
+  animation: bbva-logo 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-loading-bar {
+  animation: loading-bar 2s infinite linear;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

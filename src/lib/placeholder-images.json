@@ -1,0 +1,28 @@
+{
+  "placeholderImages": [
+    {
+      "id": "pwa-icon-192",
+      "description": "Icono PWA 192x192",
+      "imageUrl": "https://picsum.photos/seed/bbva-pwa-192/192/192",
+      "imageHint": "bbva logo"
+    },
+    {
+      "id": "pwa-icon-512",
+      "description": "Icono PWA 512x512",
+      "imageUrl": "https://picsum.photos/seed/bbva-pwa-512/512/512",
+      "imageHint": "bbva logo"
+    },
+    {
+      "id": "apple-touch-icon",
+      "description": "Icono Apple Touch",
+      "imageUrl": "https://picsum.photos/seed/bbva-apple/180/180",
+      "imageHint": "bbva logo"
+    },
+    {
+      "id": "welcome-splash",
+      "description": "Imagen de Bienvenida",
+      "imageUrl": "https://picsum.photos/seed/bbva-welcome-ios/1080/1920",
+      "imageHint": "lifestyle success"
+    }
+  ]
+}

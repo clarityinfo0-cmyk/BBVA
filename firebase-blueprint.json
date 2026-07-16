@@ -1,0 +1,118 @@
+
+{
+  "entities": {
+    "Transfer": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Transfer",
+      "type": "object",
+      "description": "Represents a bank transfer transaction.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the transfer transaction."
+        },
+        "beneficiaryName": {
+          "type": "string",
+          "description": "Name of the beneficiary."
+        },
+        "bankDetails": {
+          "type": "string",
+          "description": "Bank details of the beneficiary (e.g., account number)."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount transferred."
+        },
+        "transferDate": {
+          "type": "string",
+          "description": "Date and time of the transfer.",
+          "format": "date-time"
+        },
+        "folioNumber": {
+          "type": "string",
+          "description": "Simulated folio number for the transfer."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the transfer (e.g., success, error)."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message in case of a failed transfer."
+        }
+      },
+      "required": [
+        "id",
+        "beneficiaryName",
+        "bankDetails",
+        "amount",
+        "transferDate",
+        "folioNumber",
+        "status"
+      ]
+    },
+    "Beneficiary": {
+      "title": "Beneficiary",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "bank": { "type": "string" },
+        "accountType": { "type": "string", "enum": ["clabe", "card"] },
+        "accountNumber": { "type": "string" },
+        "lastTransfer": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "bank", "accountType", "accountNumber"]
+    },
+    "AccountSettings": {
+      "title": "Account Settings",
+      "type": "object",
+      "properties": {
+        "availableBalance": {
+          "type": "number",
+          "description": "Available amount for dispersion."
+        }
+      }
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}/transfers/{transferId}",
+        "definition": {
+          "entityName": "Transfer",
+          "schema": {
+            "$ref": "#/backend/entities/Transfer"
+          },
+          "description": "Stores transfer information for each user."
+        }
+      },
+      {
+        "path": "/users/{userId}/beneficiaries/{beneficiaryId}",
+        "definition": {
+          "entityName": "Beneficiary",
+          "schema": {
+            "$ref": "#/backend/entities/Beneficiary"
+          },
+          "description": "Stores saved beneficiaries for quick transfers."
+        }
+      },
+      {
+        "path": "/users/{userId}/settings/account",
+        "definition": {
+          "entityName": "AccountSettings",
+          "schema": {
+            "$ref": "#/backend/entities/AccountSettings"
+          },
+          "description": "Stores user-specific account settings like balance."
+        }
+      }
+    ],
+    "reasoning": "Data is isolated by userId. Beneficiaries are stored in a dedicated subcollection to allow easy selection in future transfers."
+  }
+}
