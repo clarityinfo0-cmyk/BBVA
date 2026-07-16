@@ -2,74 +2,82 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 interface SplashScreenProps {
   children: React.ReactNode;
 }
 
 export function SplashScreen({ children }: SplashScreenProps) {
-  const [stage, setStage] = useState<'images' | 'animation' | 'app'>('images');
-
-  const splashImage = PlaceHolderImages.find(img => img.id === 'welcome-splash')?.imageUrl || "https://picsum.photos/seed/bbva-welcome/1080/1920";
+  const [hide, setHide] = useState(false);
 
   useEffect(() => {
-    // Fase 1: Imagen inspiracional (2.5 segundos para dar tiempo a la PWA de cargar)
-    const timer1 = setTimeout(() => {
-      setStage('animation');
-    }, 2500);
+    const timer = setTimeout(() => {
+      setHide(true);
+    }, 3200);
 
-    // Fase 2: Animación BBVA (2 segundos más)
-    const timer2 = setTimeout(() => {
-      setStage('app');
-    }, 4500);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
-  if (stage === 'app') {
+  if (hide) {
     return <>{children}</>;
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white overflow-hidden">
-      {stage === 'images' && (
-        <div className="relative w-full h-full animate-fade-in">
-          <Image
-            src={splashImage}
-            alt="Bienvenida"
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint="lifestyle success"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#004481]/80 to-transparent flex items-end p-10">
-            <div className="text-white space-y-2">
-              <h1 className="text-4xl font-bold">Bienvenido</h1>
-              <p className="text-lg opacity-90">Tu banca digital, siempre contigo.</p>
-            </div>
-          </div>
-        </div>
-      )}
+    <>
+      {children}
 
-      {stage === 'animation' && (
-        <div className="w-full h-full bg-[#004481] flex flex-col items-center justify-center animate-fade-in">
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#004481] splash-fade">
+
+        {/* Fondo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0057A8] via-[#004481] to-[#003A70]" />
+
+        {/* Círculos decorativos */}
+        <div className="absolute w-[700px] h-[700px] rounded-full bg-white/5 blur-3xl -top-40 -left-40 animate-pulse"></div>
+
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl bottom-[-150px] right-[-150px] animate-pulse"></div>
+
+        <div className="relative flex flex-col items-center">
+
+          {/* Logo */}
           <div className="relative">
-            <span className="text-7xl font-bold text-white tracking-tighter animate-bbva-logo">
-              BBVA
-            </span>
-            <div className="absolute -bottom-4 left-0 w-full h-1 bg-white/30 overflow-hidden">
-              <div className="h-full bg-white animate-loading-bar"></div>
-            </div>
+
+            <Image
+              src="/icon-512.png"
+              alt="BBVA"
+              width={150}
+              height={150}
+              priority
+              className="logo-animation"
+            />
+
+            {/* brillo */}
+            <div className="logo-shine"></div>
+
           </div>
-          <p className="text-white/60 text-xs mt-12 uppercase tracking-widest font-medium animate-pulse">
-            Iniciando sesión segura
+
+          {/* Texto */}
+          <h1 className="mt-10 text-white text-5xl font-bold tracking-tight title-animation">
+            BBVA
+          </h1>
+
+          <p className="mt-2 text-white/70 tracking-[6px] text-sm uppercase">
+            Banca Digital
           </p>
+
+          {/* Barra */}
+          <div className="mt-16 w-64 h-1 rounded-full bg-white/20 overflow-hidden">
+
+            <div className="loading-bar h-full bg-white"></div>
+
+          </div>
+
+          <p className="mt-6 text-white/60 text-xs tracking-[5px] animate-pulse">
+            Cargando...
+          </p>
+
         </div>
-      )}
-    </div>
+
+      </div>
+    </>
   );
 }
